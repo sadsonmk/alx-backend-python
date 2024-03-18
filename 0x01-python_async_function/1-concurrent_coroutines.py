@@ -11,7 +11,9 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     """a function that utilizes wait_random from another module to return a
        list of random floating point numbers
     """
-    result = []
-    for x in range(n):
-        result.append(await wait_random(max_delay))
-    return result
+    result = [wait_random(max_delay) for _ in range(n)]
+    tasks_delay = []
+    for future_task in asyncio.as_completed(result):
+        task_delay = await future_task
+        tasks_delay.append(task_delay)
+    return tasks_delay
