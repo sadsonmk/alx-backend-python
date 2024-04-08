@@ -8,7 +8,7 @@ from typing import (
     List,
     Dict,
 )
-from client import GithubOrgClient 
+from client import GithubOrgClient
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -17,7 +17,9 @@ class TestGithubOrgClient(unittest.TestCase):
         ("google", {'login': "google"}),
         ("abc", {'login': "abc"}),
         ])
-    @patch("client.get_json",)
+    @patch(
+            "client.get_json",
+            )
     def test_org(self, org: str, result: Dict, fn: MagicMock) -> None:
         """the method that tests the org function"""
         fn.return_value = MagicMock(return_value=result)
