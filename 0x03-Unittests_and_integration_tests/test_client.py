@@ -20,7 +20,7 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch("client.get_json",)
     def test_org(self, org: str, result: Dict, fn: MagicMock) -> None:
         """the method that tests the org function"""
-        fn.return_value = MagiMock(return_value=result)
+        fn.return_value = MagicMock(return_value=result)
         org_client_obj = GithubOrgClient(org)
         self.assertEqual(org_client_obj.org(), result)
         fn.assert_called_once_with(f"https://api.github.com/orgs/{org}")
