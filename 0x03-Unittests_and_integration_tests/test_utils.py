@@ -55,5 +55,28 @@ class TestGetJson(unittest.TestCase):
             requested.assert_called_once_with(test_url)
 
 
+class TestMemoize(unittest.TestCase):
+    """implements the memoize tests"""
+    def test_memoize(self):
+        """this tests the memoize function"""
+        class TestClass:
+            def a_method(self):
+                return 42
+
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        with patch.object(
+                TestClass,
+                'a_method',
+                return_value=lambda: 42,
+                ) as result:
+            obj = TestClass()
+            self.assertEqual(obj.a_property(), 42)
+            self.assertEqual(obj.a_property(), 42)
+            result.assert_called_once()
+
+
 if __name__ == "__main__":
     unittest.main()
