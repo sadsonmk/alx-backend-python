@@ -4,6 +4,11 @@
 import unittest
 from unittest import (Mock, patch, MagicMock)
 from parameterized import parameterized
+from typing import (
+    List,
+    Dict,
+)
+from client import GithubOrgClient 
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -13,7 +18,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ("abc", {'login': "abc"}),
         ])
     @patch("client.get_json",)
-    def test_org(self, org, result, fn):
+    def test_org(self, org: str, result: Dict, fn: MagicMock) -> None:
         """the method that tests the org function"""
         fn.return_value = MagiMock(return_value=result)
         org_client_obj = GithubOrgClient(org)
